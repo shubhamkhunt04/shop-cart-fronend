@@ -62,7 +62,7 @@ const SingleProduct = () => {
             {Array(data?.payload?.rating)
               .fill('')
               .map((_, i) => (
-                <AiFillStar color='green' />
+                <AiFillStar color='green' key={i} />
               ))}
           </Box>
           <Badge borderRadius='full' px='2' colorScheme='teal'>

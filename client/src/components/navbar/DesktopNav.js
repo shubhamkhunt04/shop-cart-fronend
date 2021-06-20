@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, Box } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { RiShoppingCart2Line } from 'react-icons/ri';
 
 import { ROUTES } from '../../common/constant';
 import './DesktopNav.css';
+import { AppContext } from '../../AppContext';
 
 const DesktopNav = () => {
+  const { state } = useContext(AppContext);
+
   return (
     <div className='container container-nav'>
       <Link to={ROUTES.PRODUCTS}>
@@ -22,7 +25,7 @@ const DesktopNav = () => {
         <Link to={ROUTES.CART_ITEMS} className='pointer'>
           <Box d='flex' position='relative'>
             <RiShoppingCart2Line size='30px' />
-            <Text className='cart-icon'>5</Text>
+            <Text className='cart-icon'>{state?.cartItems.length || 0}</Text>
           </Box>
         </Link>
         {/* </ul> */}

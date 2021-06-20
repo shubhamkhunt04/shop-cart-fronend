@@ -12,7 +12,8 @@ module.exports.validateProductInput = async (
   rating,
   size,
   reversible,
-  idealFor
+  idealFor,
+  quantity
 ) => {
   const productSchema = Joi.object().keys({
     name: Joi.string().min(3).max(100).required(),
@@ -27,6 +28,7 @@ module.exports.validateProductInput = async (
     size: Joi.array().items(Joi.string().min(1).max(3).required()),
     reversible: Joi.boolean().required(),
     idealFor: Joi.string().min(3).max(30).required(),
+    quantity: Joi.number().integer().required(),
   });
   try {
     const { error } = await productSchema.validate(
@@ -43,6 +45,7 @@ module.exports.validateProductInput = async (
         size,
         reversible,
         idealFor,
+        quantity,
       },
       { abortEarly: false }
     );

@@ -36,6 +36,7 @@ productRouter
       size,
       reversible,
       idealFor,
+      quantity,
     } = req.body;
 
     const { error } = await validateProductInput(
@@ -50,7 +51,8 @@ productRouter
       rating,
       size,
       reversible,
-      idealFor
+      idealFor,
+      quantity
     );
     if (error) {
       return res.json({
