@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const { corsWithOptions } = require('./cors');
 const productRouter = require('./routes/productRouter');
+const orderRouter = require('./routes/orderRouter');
 
 const port = 4000;
 
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/products', productRouter);
+app.use('/orders', orderRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
