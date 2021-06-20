@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=VT323&display=swap");
+
+body {
+    background-color: #719fb0;
+    font-family: "VT323", monospace;
+    margin: 0;
+}
+
+.container {
+    width: 95%;
+    height: 50px;
+    margin: 0 40px;
+    position: fixed;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    z-index: 100;
+}
+
+.container-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-left: 2em;
+    text-decoration: none;
+}
+
+.nav-brand {
+    font-size: 18px;
+    font-weight: 700;
+    color: #4E4E4E;
+}
+
+nav li:hover,
+nav li:focus {
+    text-decoration: none;
+    color: black;
+}
+
+nav .link-item {
+    text-decoration: none !important;
+    opacity: 0.6;
+}
+
+nav .selected-link-item,
+nav .link-item:hover {
+    opacity: 1;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+
+.cart-icon {
+    position: absolute;
+    width: 1.2rem;
+    height: 1.2rem;
+    right: -0.2rem;
+    bottom: 12px;
+    border-radius: 50%;
+    background: #99cbf7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
