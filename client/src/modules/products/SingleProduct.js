@@ -68,7 +68,7 @@ const SingleProduct = () => {
               Add To Cart
             </Button>
             <Button bg='#FB641B' color='white' _hover='false'>
-              Add To Cart
+              Buy Now
             </Button>
           </Flex>
         </Box>
@@ -105,23 +105,35 @@ const SingleProduct = () => {
           <Badge borderRadius='full' px='2' colorScheme='teal'>
             {data?.payload?.rating} rating
           </Badge>
-          <Box>
-            <Text fontSize='xl'>Available offers </Text>
-            <Text>
-              Special PriceGet extra 5% off (price inclusive of discount)T&C
-            </Text>
-            <Text>
-              Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit
-              CardT&C
-            </Text>
-            <Text>
-              Bank OfferFlat ₹100 off on first Flipkart Pay Later order of ₹500
-              and aboveT&C
-            </Text>
-            <Text>No Cost EMI on Flipkart Axis Bank Credit CardT&C</Text>
+          <Box mt='4'>
+            <Box d='flex' alignItems='center'>
+              <Image
+                src='https://rukminim1.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90'
+                height='20px'
+                width='20px'
+                mr='2'
+              />
+              <Text fontSize='2xl'>Available offers </Text>
+            </Box>
+            <Box ml='8' lineHeight='35px'>
+              <Text>
+                - Special PriceGet extra 5% off (price inclusive of discount)T&C
+              </Text>
+              <Text>
+                - Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit
+                CardT&C
+              </Text>
+              <Text>
+                - Bank OfferFlat ₹100 off on first Flipkart Pay Later order of
+                ₹500 and aboveT&C
+              </Text>
+              <Text>- No Cost EMI on Flipkart Axis Bank Credit CardT&C</Text>
+            </Box>
           </Box>
-          <Text>Size</Text>
-          <Box d='flex' alignItems='baseline'>
+          <Text fontSize='2xl' mt='4'>
+            Size{' '}
+          </Text>
+          <Box d='flex' alignItems='baseline' m='6'>
             {data?.payload?.size?.map((size) => {
               return (
                 <Box
@@ -155,7 +167,7 @@ const SingleProduct = () => {
             <Text mr='8' color='grey'>
               Reversible
             </Text>
-            <Text ml='8'>{data?.payload?.reversible ? 'YES' : 'NO'}</Text>
+            <Text ml='6'>{data?.payload?.reversible ? 'YES' : 'NO'}</Text>
           </Box>
           <Box d='flex' lineHeight='35px'>
             <Text mr='8' color='grey'>
