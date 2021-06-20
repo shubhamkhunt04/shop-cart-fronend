@@ -18,7 +18,8 @@ const Products = () => {
     if (data?.payload) {
       dispatch({ type: 'SET_PRODUCTS', payload: data?.payload });
     }
-  }, [data?.payload, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <SimpleGrid columns={[1, 2, 3, 3, 4]} gap={8}>

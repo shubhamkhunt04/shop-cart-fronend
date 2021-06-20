@@ -39,6 +39,8 @@ const reducer = (state, action) => {
 
     case 'CART_ITEMS':
       return { ...state, cartItems: payload };
+    case 'CLEAR_CART':
+      return { ...state, cartItems: [] };
 
     case 'REMOVE_ITEM':
       return {

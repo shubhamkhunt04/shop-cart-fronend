@@ -6,6 +6,8 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
 import MobileNav from './components/navbar/MobileNav';
 import useWindowSize from './hooks/useWindowSize';
 import DesktopNav from './components/navbar/DesktopNav';
@@ -13,18 +15,20 @@ import { ROUTES } from './common/constant';
 import SingleProduct from './modules/products/SingleProduct';
 import Products from './modules/products/Products';
 import CartItems from './modules/cartItem/CartItems';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Routes = () => {
   const { width } = useWindowSize();
+
   return (
     <div>
       <Router>
-        {width < 1080 ? <MobileNav /> : <DesktopNav />}
+        <ToastContainer />
+        {/* {width < 700 ? <MobileNav /> : <DesktopNav />} */}
+        <DesktopNav />
         <Switch>
           <div>
             <Divider />
-            {/* <Flex justify='center' align='center' my='60px'> */}
-            {/* <Box d='flex' justifyContent='center' my='60px'> */}
             <Box maxW='80%' m='60px auto'>
               <Redirect from={ROUTES.MAIN} to={ROUTES.PRODUCTS} />
               <Route exact path={ROUTES.PRODUCTS} component={Products} />
@@ -35,8 +39,6 @@ const Routes = () => {
               />
               <Route exact path={ROUTES.CART_ITEMS} component={CartItems} />
             </Box>
-            {/* </Box> */}
-            {/* </Flex> */}
           </div>
         </Switch>
       </Router>
