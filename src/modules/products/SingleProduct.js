@@ -13,8 +13,8 @@ const SingleProduct = () => {
   const { productId } = useParams();
   const { error, loading, data } = useFetch(`${API}/products/${productId}`);
 
-  if (error) <h1>{error}</h1>;
-  if (loading) <Loader />;
+  if (loading) return <Loader />;
+  if (error) return <h1>{error}</h1>;
 
   const addToCartBtnHandler = () => {
     const payload = {

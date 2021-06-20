@@ -11,15 +11,15 @@ const Products = () => {
   const { dispatch } = useContext(AppContext);
   const { error, loading, data } = useFetch(`${API}/products`);
 
-  if (error) <h1>{error}</h1>;
-  if (loading) <Loader />;
-
   useEffect(() => {
     if (data?.payload) {
       dispatch({ type: 'SET_PRODUCTS', payload: data?.payload });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (loading) return <Loader />;
+  if (error) return <h1>{error}</h1>;
 
   return (
     <SimpleGrid columns={[1, 2, 3, 3, 4]} gap={8}>
