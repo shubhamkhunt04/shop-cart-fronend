@@ -1,17 +1,50 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Flex, Image, Text, Badge, Button } from '@chakra-ui/react';
 import { AiFillStar } from 'react-icons/ai';
 import useFetch from '../../hooks/useFetch';
 import { API } from '../../common/constant';
 import Loader from '../../components/loader/Loader';
+import { AppContext } from '../../AppContext';
 
 const SingleProduct = () => {
+  const { state, dispatch } = useContext(AppContext);
+  // useEffect(() => {
+  //   dispatch({ type: 'GET_TOTAL' });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [state]);
+
   const { productId } = useParams();
   const { error, loading, data } = useFetch(`${API}/products/${productId}`);
 
   if (error) <h1>{error}</h1>;
   if (loading) <Loader />;
+
+  const addToCartBtnHandler = () => {
+    const payload = {
+      name: data?.payload?.name,
+      price: data?.payload?.price,
+      specialPrice: data?.payload?.specialPrice,
+      rating: data?.payload?.rating,
+      productImg: data?.payload?.imgUrl,
+      type: data?.payload?.type,
+      productId: data?.payload._id,
+      quantity: data?.payload?.quantity,
+    };
+
+    const productAlreadyAddedIntoCart = state.cartItems.filter(
+      (item) => item._id !== productId
+    );
+    console.log({ productAlreadyAddedIntoCart });
+
+    // if (!productAlreadyAddedIntoCart) {
+    dispatch({ type: 'ADD_TO_CART', payload: payload });
+    dispatch({ type: 'GET_TOTAL' });
+
+    // } else {
+    //   alert('Item is already added into cart');
+    // }
+  };
 
   const discount =
     (1 - data?.payload?.specialPrice / data?.payload?.price) * 100;
@@ -27,7 +60,12 @@ const SingleProduct = () => {
             objectFit='cover'
           />
           <Flex justify='space-evenly' mt='4'>
-            <Button bg='#FF9F00' color='white' _hover='false'>
+            <Button
+              bg='#FF9F00'
+              color='white'
+              _hover='false'
+              onClick={addToCartBtnHandler}
+            >
               Add To Cart
             </Button>
             <Button bg='#FB641B' color='white' _hover='false'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import {
   Box,
   Drawer,
@@ -12,18 +12,18 @@ import {
 } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-import { ROUTES } from '../../common/constant';
+// import { ROUTES } from '../../common/constant';
 import './MobileNav.css';
 
 const MobileNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
-  const [selectedItem, setSelectedItem] = useState(
-    window.location?.pathname || ROUTES.ALL
-  );
+  // const [selectedItem, setSelectedItem] = useState(
+  //   window.location?.pathname || ROUTES.ALL
+  // );
 
-  useEffect(() => {}, [selectedItem]);
+  // useEffect(() => {}, [selectedItem]);
 
   return (
     <div className='mobile-nav-container'>

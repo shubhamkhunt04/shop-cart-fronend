@@ -15,7 +15,7 @@ import {
 import { AppContext } from '../../AppContext';
 
 const SingleItemRow = ({ name, imgUrl, type, productId, quantity, price }) => {
-  const { state, dispatch } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
 
   const incrementQuantity = (id) => {
     console.log('incrementQuantity', id);

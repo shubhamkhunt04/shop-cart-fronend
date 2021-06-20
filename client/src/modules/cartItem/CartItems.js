@@ -7,11 +7,11 @@ const CartItems = () => {
   const { state, dispatch } = useContext(AppContext);
   useEffect(() => {
     dispatch({ type: 'GET_TOTAL' });
-  }, [state]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.cartItems]);
   return (
     <>
       {state?.cartItems?.map((item) => {
-        console.log(item);
         return (
           <SingleItemRow
             key={item?.productId}

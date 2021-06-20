@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Box, Text, Image, Button, Badge } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
@@ -18,6 +18,10 @@ const Card = ({
   quantity,
 }) => {
   const { state, dispatch } = useContext(AppContext);
+  // useEffect(() => {
+  //   dispatch({ type: 'GET_TOTAL' });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [state.totalItem]);
   const addToCartBtnHandler = () => {
     console.log('Btn clickefd');
     const payload = {
@@ -38,6 +42,7 @@ const Card = ({
 
     // if (!productAlreadyAddedIntoCart) {
     dispatch({ type: 'ADD_TO_CART', payload: payload });
+    dispatch({ type: 'GET_TOTAL' });
     // } else {
     //   alert('Item is already added into cart');
     // }
