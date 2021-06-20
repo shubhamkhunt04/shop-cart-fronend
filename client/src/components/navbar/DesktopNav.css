@@ -72,10 +72,10 @@ nav .link-item:hover {
 
 .cart-icon {
     position: absolute;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     right: -0.2rem;
-    bottom: 12px;
+    bottom: 15px;
     border-radius: 50%;
     background: #99cbf7;
     display: flex;

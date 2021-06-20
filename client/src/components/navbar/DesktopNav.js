@@ -18,7 +18,7 @@ const DesktopNav = () => {
       <nav>
         <Link to={ROUTES.CART_ITEMS} className='pointer'>
           <Box d='flex' position='relative'>
-            <RiShoppingCart2Line size='30px' />
+            <RiShoppingCart2Line size='40px' />
             <Text className='cart-icon'>{state?.totalItem || 0}</Text>
           </Box>
         </Link>
