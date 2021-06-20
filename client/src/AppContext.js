@@ -1,7 +1,4 @@
-// import jwtDecode from 'jwt-decode';
 import { useReducer, createContext } from 'react';
-// import api from './common/api';
-// import { TOKEN } from './common/constant';
 
 const initialState = {
   products: [],
@@ -24,10 +21,7 @@ const reducer = (state, action) => {
 
     case 'INCREMENT_QUANTITY':
       const incrementQuantity = state.cartItems.map((item) => {
-        console.log({ item });
         if (item.productId === payload) {
-          console.log(item.productId);
-          console.log(payload);
           return { ...item, quantity: item.quantity + 1 };
         }
         return item;
@@ -56,7 +50,6 @@ const reducer = (state, action) => {
       let { totalAmount, totalItem } = state.cartItems.reduce(
         (accum, curVal) => {
           let { specialPrice, quantity } = curVal;
-          console.log({ accum, curVal });
           let updatedTotalAmount = specialPrice * quantity;
           accum.totalAmount += updatedTotalAmount;
 

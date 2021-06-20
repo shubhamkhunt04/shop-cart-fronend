@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Box, Text, Image, Button, Badge } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
@@ -18,10 +18,6 @@ const Card = ({
   quantity,
 }) => {
   const { state, dispatch } = useContext(AppContext);
-  // useEffect(() => {
-  //   dispatch({ type: 'GET_TOTAL' });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [state.totalItem]);
   const addToCartBtnHandler = () => {
     console.log('Btn clickefd');
     const payload = {
@@ -35,29 +31,27 @@ const Card = ({
       quantity,
     };
 
-    // const productAlreadyAddedIntoCart = state.cartItems.filter(
-    //   (item) => item._id !== productId
-    // );
-    // console.log({ productAlreadyAddedIntoCart });
+    // check product is already exist into cart or not
+    const productAlreadyAddedIntoCart = state.cartItems.filter(
+      (item) => item.productId === productId
+    );
 
-    // if (!productAlreadyAddedIntoCart) {
-    dispatch({ type: 'ADD_TO_CART', payload: payload });
-    dispatch({ type: 'GET_TOTAL' });
-    // } else {
-    //   alert('Item is already added into cart');
-    // }
+    if (!productAlreadyAddedIntoCart.length) {
+      dispatch({ type: 'ADD_TO_CART', payload: payload });
+      dispatch({ type: 'GET_TOTAL' });
+    } else {
+      dispatch({
+        type: 'INCREMENT_QUANTITY',
+        payload: productAlreadyAddedIntoCart[0].productId,
+      });
+      dispatch({ type: 'GET_TOTAL' });
+    }
   };
 
   const discount = (1 - specialPrice / price) * 100;
 
   return (
-    <Box
-      w='285px'
-      minH='450px'
-      borderRadius='5'
-      bgColor='white'
-      // position='relative'
-    >
+    <Box w='285px' minH='450px' borderRadius='5' bgColor='white'>
       <Link to={`${ROUTES.PRODUCTS}/${productId}`}>
         <Image src={productImg} height='340px' width='100%' objectFit='cover' />
       </Link>

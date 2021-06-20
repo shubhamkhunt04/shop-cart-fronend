@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Flex, Image, Text, Badge, Button } from '@chakra-ui/react';
 import { AiFillStar } from 'react-icons/ai';
@@ -9,10 +9,6 @@ import { AppContext } from '../../AppContext';
 
 const SingleProduct = () => {
   const { state, dispatch } = useContext(AppContext);
-  // useEffect(() => {
-  //   dispatch({ type: 'GET_TOTAL' });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [state]);
 
   const { productId } = useParams();
   const { error, loading, data } = useFetch(`${API}/products/${productId}`);
@@ -32,18 +28,21 @@ const SingleProduct = () => {
       quantity: data?.payload?.quantity,
     };
 
+    // check product is already exist into cart or not
     const productAlreadyAddedIntoCart = state.cartItems.filter(
-      (item) => item._id !== productId
+      (item) => item.productId === productId
     );
-    console.log({ productAlreadyAddedIntoCart });
 
-    // if (!productAlreadyAddedIntoCart) {
-    dispatch({ type: 'ADD_TO_CART', payload: payload });
-    dispatch({ type: 'GET_TOTAL' });
-
-    // } else {
-    //   alert('Item is already added into cart');
-    // }
+    if (!productAlreadyAddedIntoCart.length) {
+      dispatch({ type: 'ADD_TO_CART', payload: payload });
+      dispatch({ type: 'GET_TOTAL' });
+    } else {
+      dispatch({
+        type: 'INCREMENT_QUANTITY',
+        payload: productAlreadyAddedIntoCart[0].productId,
+      });
+      dispatch({ type: 'GET_TOTAL' });
+    }
   };
 
   const discount =
