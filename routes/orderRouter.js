@@ -23,16 +23,12 @@ orderRouter
     }
   })
   .post('/createOrder', async (req, res) => {
-    console.log('Create order');
     try {
       const { products } = req.body;
-      console.log(products);
-      var productIdIsFound = true;
       // check ordered product is exist in database or not
       const productExistInDB = new Promise((resolve, reject) => {
-        products.forEach(async (product) => {
-          const findProduct = await Product.findById(product._id);
-          console.log({ findProduct });
+        products.forEach(async (productId) => {
+          const findProduct = await Product.findById(productId);
           if (!findProduct) {
             // product is not exist in db
             reject({ message: 'Product Id not found' });
@@ -44,17 +40,13 @@ orderRouter
       productExistInDB
         .then(async (exist) => {
           if (exist) {
-            const createOrder = await Order.create(products);
-            if (!createOrder) {
-              return res.json({
-                payload: result,
-                message: 'Product not found',
-                status: 400,
-              });
-            }
+            const orderInstance = await new Order();
+            orderInstance.orderedProducts.push(...products);
+            await orderInstance.save();
+
             return res.json({
-              payload: createOrder,
-              message: 'Product created successfully',
+              payload: orderInstance.orderedProducts,
+              message: 'Order created successfully',
               status: 200,
             });
           }
