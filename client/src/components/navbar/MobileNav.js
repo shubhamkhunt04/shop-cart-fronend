@@ -11,7 +11,6 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { Link } from 'react-router-dom';
 
 import { ROUTES } from '../../common/constant';
 import './MobileNav.css';

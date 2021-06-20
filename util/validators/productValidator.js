@@ -23,7 +23,7 @@ module.exports.validateProductInput = async (
     fabric: Joi.string().min(3).max(30).required(),
     pattern: Joi.string().min(3).max(30).required(),
     imgUrl: Joi.string().uri().required(),
-    rating: Joi.number().min(3).max(30).required(),
+    rating: Joi.number().min(0).max(5).required(),
     size: Joi.array().items(Joi.string().min(1).max(3).required()),
     reversible: Joi.boolean().required(),
     idealFor: Joi.string().min(3).max(30).required(),

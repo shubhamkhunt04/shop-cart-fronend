@@ -15,3 +15,6 @@ export const MODULES = {
   NVESTOR: 'NVESTOR',
   NEXT_HOME_BUYER: 'NEXT HOME BUYER',
 };
+
+// main end point
+export const API = process.env.REACT_APP_SERVER_REST_URL;

@@ -2,17 +2,26 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Flex, Image, Text, Badge, Button } from '@chakra-ui/react';
 import { AiFillStar } from 'react-icons/ai';
+import useFetch from '../../hooks/useFetch';
+import { API } from '../../common/constant';
+import Loader from '../../components/loader/Loader';
 
 const SingleProduct = () => {
   const { productId } = useParams();
-  console.log({ productId });
+  const { error, loading, data } = useFetch(`${API}/products/${productId}`);
+
+  if (error) <h1>{error}</h1>;
+  if (loading) <Loader />;
+
+  const discount =
+    (1 - data?.payload?.specialPrice / data?.payload?.price) * 100;
 
   return (
     <Box maxW='80vw' mt='8'>
       <Flex>
         <Box width='40vw'>
           <Image
-            src='https://rukminim1.flixcart.com/image/580/696/kjiwfbk0-0/t-shirt/e/k/s/m-t305-as10yldnwh-seven-rocks-original-imafz2qfvx7tznnn.jpeg?q=50'
+            src={data?.payload?.imgUrl}
             height='600px'
             width='100%'
             objectFit='cover'
@@ -27,24 +36,37 @@ const SingleProduct = () => {
           </Flex>
         </Box>
         <Box width='60vw' height='80px' justify='start' pl='8'>
-          <Text fontSize='2xl'>Color Block Men Round Neck Orange T-Shirt</Text>
+          <Text fontSize='2xl'>{data?.payload?.name}</Text>
           <Text fontSize='sm' color='#26A541'>
             Special Price
           </Text>
-          <Text>
-            299 <span> &#x20B9;</span> <span> &#x20B9;</span>999
-            <span>78% off</span>
+          <Text as='span'>
+            <span> &#x20B9;</span>
+            {data?.payload?.specialPrice}
+          </Text>
+          <Text
+            as='span'
+            color='gray.600'
+            fontSize='sm'
+            textDecoration='line-through'
+            mx='2'
+          >
+            <span> &#x20B9;</span>
+            {data?.payload?.price}
+          </Text>
+          <Text as='span' color='green.400' fontSize='sm'>
+            {parseInt(discount)}% off
           </Text>
 
           <Box d='flex' mt='2' alignItems='center'>
-            {Array(5)
+            {Array(data?.payload?.rating)
               .fill('')
               .map((_, i) => (
                 <AiFillStar color='green' />
               ))}
           </Box>
           <Badge borderRadius='full' px='2' colorScheme='teal'>
-            4 rating
+            {data?.payload?.rating} rating
           </Badge>
           <Box>
             <Text fontSize='xl'>Available offers </Text>
@@ -63,7 +85,7 @@ const SingleProduct = () => {
           </Box>
           <Text>Size</Text>
           <Box d='flex' alignItems='baseline'>
-            {['S', 'M', 'L', 'XL'].map((size) => {
+            {data?.payload?.size?.map((size) => {
               return (
                 <Box
                   height='40px'
@@ -84,25 +106,25 @@ const SingleProduct = () => {
             <Text mr='8' color='grey'>
               Pattern
             </Text>
-            <Text ml='8'>Printed</Text>
+            <Text ml='8'>{data?.payload?.pattern}</Text>
           </Box>
           <Box d='flex' lineHeight='35px'>
             <Text mr='8' color='grey'>
               Fabric
             </Text>
-            <Text ml='8'>Pure Cotton</Text>
+            <Text ml='8'>{data?.payload?.fabric}</Text>
           </Box>
           <Box d='flex' lineHeight='35px'>
             <Text mr='8' color='grey'>
               Reversible
             </Text>
-            <Text ml='8'>No</Text>
+            <Text ml='8'>{data?.payload?.reversible ? 'YES' : 'NO'}</Text>
           </Box>
           <Box d='flex' lineHeight='35px'>
             <Text mr='8' color='grey'>
               Ideal For
             </Text>
-            <Text ml='8'>Man</Text>
+            <Text ml='8'>{data?.payload?.idealFor}</Text>
           </Box>
         </Box>
       </Flex>
