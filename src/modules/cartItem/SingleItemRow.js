@@ -18,19 +18,15 @@ const SingleItemRow = ({ name, imgUrl, type, productId, quantity, price }) => {
   const { dispatch } = useContext(AppContext);
 
   const incrementQuantity = (id) => {
-    console.log('incrementQuantity', id);
     dispatch({ type: 'INCREMENT_QUANTITY', payload: id });
   };
 
   const decrementQuantity = (id) => {
-    console.log('decrementQuantity', id);
     dispatch({ type: 'DECREMENT_QUANTITY', payload: id });
   };
 
   const removeItem = (id) => {
-    console.log('removeItem', id);
     dispatch({ type: 'REMOVE_ITEM', payload: id });
-    console.log('remove items');
   };
 
   return (

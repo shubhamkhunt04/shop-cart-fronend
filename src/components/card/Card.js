@@ -19,7 +19,6 @@ const Card = ({
 }) => {
   const { state, dispatch } = useContext(AppContext);
   const addToCartBtnHandler = () => {
-    console.log('Btn clickefd');
     const payload = {
       name,
       price,
