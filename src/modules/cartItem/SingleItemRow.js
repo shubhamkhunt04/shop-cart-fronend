@@ -17,6 +17,10 @@ import { AppContext } from '../../AppContext';
 const SingleItemRow = ({ name, imgUrl, type, productId, quantity, price }) => {
   const { dispatch } = useContext(AppContext);
 
+  if (!quantity) {
+    dispatch({ type: 'REMOVE_ITEM', payload: productId });
+  }
+
   const incrementQuantity = (id) => {
     dispatch({ type: 'INCREMENT_QUANTITY', payload: id });
   };

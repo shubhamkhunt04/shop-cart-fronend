@@ -28,7 +28,6 @@ const CartItems = () => {
   }, [state.cartItems]);
 
   const placeOrderBtnHandler = async () => {
-    console.log('checkout');
     setIsOpen(false);
     const orderProductsId = state.cartItems.map((item) => item.productId);
     const orderData = {
